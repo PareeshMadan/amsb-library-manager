@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      CI_ENVIRONMENT: development
+    command: >
+      bash -c "chown -R www-data:www-data /var/www/html/writable
+      && docker-php-entrypoint apache2-foreground"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: library_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
