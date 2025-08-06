@@ -53,28 +53,50 @@ Ensure you have the following installed on your local machine:
    - Start the MySQL database container
    - Set up networking between containers
 
-3. **Install Dependencies** (if needed)
+3. **Install Dependencies**
    ```bash
-   docker exec amsb-library-manager-web-1 composer install
+   docker exec amsb-library-manager-web-1 php composer-setup.php
+   docker exec amsb-library-manager-web-1 php composer.phar install
    ```
 
-4. **Run Database Migrations**
+4. **Configure Environment**
+   ```bash
+   docker exec amsb-library-manager-web-1 cp env .env
+   ```
+   Then add database configuration to `.env`:
+   ```bash
+   docker exec amsb-library-manager-web-1 bash -c "cat >> .env << 'EOF'
+
+# Database Configuration for Docker
+CI_ENVIRONMENT = development
+app.baseURL = 'http://localhost:8080'
+
+database.default.hostname = db
+database.default.database = library_db
+database.default.username = user
+database.default.password = pass
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+EOF"
+   ```
+
+5. **Run Database Migrations**
    ```bash
    docker exec amsb-library-manager-web-1 php spark migrate
    ```
 
-5. **Seed Sample Data** (optional)
+6. **Seed Sample Data** (optional)
    ```bash
    docker exec amsb-library-manager-web-1 php spark db:seed Books
    ```
 
-6. **Access the Application**
+7. **Access the Application**
    - Open your web browser and navigate to: [http://localhost:8080](http://localhost:8080)
    - You should see the Library Management System with sample books
 
 ### Environment Configuration
 
-The application is pre-configured with the following settings:
+The application requires manual configuration of the `.env` file with the following settings:
 
 - **Database Host**: `db` (Docker container name)
 - **Database Name**: `library_db`
@@ -83,7 +105,7 @@ The application is pre-configured with the following settings:
 - **Application URL**: `http://localhost:8080`
 
 These settings are defined in:
-- `.env` file (application configuration)
+- `.env` file (application configuration - **must be manually configured as shown in step 4**)
 - `docker-compose.yml` (container configuration)
 
 ## Usage Guide
