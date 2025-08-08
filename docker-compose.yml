@@ -9,9 +9,7 @@ services:
       - .:/var/www/html
     environment:
       CI_ENVIRONMENT: development
-    command: >
-      bash -c "chown -R www-data:www-data /var/www/html/writable
-      && docker-php-entrypoint apache2-foreground"
+    command: docker-php-entrypoint apache2-foreground
     depends_on:
       - db
 
