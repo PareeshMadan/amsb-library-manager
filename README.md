@@ -65,8 +65,7 @@ Ensure you have the following installed on your local machine:
    ```
    Then add database configuration to `.env`:
    ```bash
-   docker exec amsb-library-manager-web-1 bash -c "cat > /var/www/html/.env << 'EOF'
-
+docker exec amsb-library-manager-web-1 bash -c "cat > /var/www/html/.env << 'EOF'
 CI_ENVIRONMENT=development
 app.baseURL='http://localhost:8080'
 
