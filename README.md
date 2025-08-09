@@ -2,6 +2,8 @@
 
 A comprehensive CRUD application built with CodeIgniter 4 for managing library books, featuring book cover image uploads and a responsive Bootstrap interface.
 
+<img width="1440" height="730" alt="Image" src="https://github.com/user-attachments/assets/be58be91-da34-4340-98a6-3c3fcc7487bf" />
+
 ## Features
 
 ### Core Functionality
