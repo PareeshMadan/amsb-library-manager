@@ -67,17 +67,17 @@ Ensure you have the following installed on your local machine:
    ```
    Then add database configuration to `.env`:
    ```bash
-docker exec amsb-library-manager-web-1 bash -c "cat > /var/www/html/.env << 'EOF'
-CI_ENVIRONMENT=development
-app.baseURL='http://localhost:8080'
+   docker exec amsb-library-manager-web-1 bash -c "cat > /var/www/html/.env << 'EOF'
+   CI_ENVIRONMENT=development
+   app.baseURL='http://localhost:8080'
 
-database.default.hostname=db
-database.default.database=library_db
-database.default.username=user
-database.default.password=pass
-database.default.DBDriver=MySQLi
-database.default.port=3306
-EOF"
+   database.default.hostname=db
+   database.default.database=library_db
+   database.default.username=user
+   database.default.password=pass
+   database.default.DBDriver=MySQLi
+   database.default.port=3306
+   EOF"
    
 
 5. **Run Database Migrations**
